@@ -1,7 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 #include <SDL2/SDL.h>
-#include "../ECS/Registry.h"
+#include "../ECS/ECS.h"
 #include "../AssetStore/AssetStore.h"
 // #include "../EventBus/EventBus.h"
 
@@ -21,7 +21,7 @@ class Game{
         std::unique_ptr <Registry> registry;
         std::unique_ptr <Assetstore> assetstore;
         // std::unique_ptr <EventBus> eventBus;
-        // SDL_Rect camera;
+        SDL_Rect camera;
 
     public:
         Game();

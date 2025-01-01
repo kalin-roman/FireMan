@@ -1,7 +1,6 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include <bitset>
 #include <vector>
 #include <typeindex>
 #include <set>
@@ -11,11 +10,7 @@
 #include <iostream>
 
 #include "../Logger/Logger.h"
-
-
-const unsigned int MAX_COMPONENTS = 32;
-
-typedef std::bitset<MAX_COMPONENTS> Signature;
+#include "Registry.h"
 
 class Entity
 {
@@ -44,8 +39,25 @@ public:
     template<typename TComponent> bool hasComponent() const;
     template<typename TComponent> TComponent& getComponent() const;
 
-    class Registry* registry;
+    Registry* registry;
 
+};
+
+template<typename TComponent, typename ...TArgs> 
+void Entity::AddComponent(TArgs&& ...args){
+    registry->AddComponent<TComponent>(*this, std::forward<TArgs>(args)...);
+};
+template<typename TComponent> 
+void Entity::removeComponent(){
+    registry->removeComponent<TComponent>(*this);
+};
+template<typename TComponent> 
+bool Entity::hasComponent() const{
+    return registry->hasComponent<TComponent>(*this);
+};
+template<typename TComponent> 
+TComponent& Entity::getComponent() const{
+    return registry->getComponent<TComponent>(*this);
 };
 
 #endif

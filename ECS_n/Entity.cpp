@@ -27,20 +27,5 @@ bool Entity::HasGroup(const std::string& group) const{
     return registry->EntityBelongsToGroup(*this,group);
 }
 
-template<typename TComponent, typename ...TArgs> 
-void Entity::AddComponent(TArgs&& ...args){
-    registry->AddComponent<TComponent>(*this, std::forward<TArgs>(args)...);
-};
-template<typename TComponent> 
-void Entity::removeComponent(){
-    registry->removeComponent<TComponent>(*this);
-};
-template<typename TComponent> 
-bool Entity::hasComponent() const{
-    return registry->hasComponent<TComponent>(*this);
-};
-template<typename TComponent> 
-TComponent& Entity::getComponent() const{
-    return registry->getComponent<TComponent>(*this);
-};
+
 
