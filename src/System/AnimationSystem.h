@@ -23,17 +23,15 @@ public:
             auto& sprite = entity.getComponent<SpriteComponent>();
 
 
-
-
-            animation.currentFrame = (
-                (SDL_GetTicks() - animation.startTime) 
-                    * animation.frameSpeedRate/1000) % animation.numFrams;
+            int l = SDL_GetTicks() - animation.startTime;
+            int n = l * animation.frameSpeedRate/1000;     
+            animation.currentFrame = (n + animation.offsetFrame) % animation.numFrams;
             
-            int pos = animation.currentFrame + animation.offestFrame;
-            if (pos > animation.numFrams - 1) {
-                animation.currentFrame = pos - animation.numFrams - 1;
-            }
-                Logger::Log("cF :" + std::to_string(animation.currentFrame));
+            if (entity.HasGroup("hummer")) {
+                
+                // Logger::Log("L:" + std::to_string(l) + " n="+ std::to_string(n) + " off=" + std::to_string(animation.offsetFrame) );
+                // 
+            }   
 
             sprite.srcRect.x = animation.currentFrame * sprite.width;
         }   

@@ -4,6 +4,7 @@
 #include "../ECS/ECS.h"
 #include "../Components/Transformcomponent.h"
 #include "../Components/SpriteComponent.h"
+#include "../Components/AnimationComponent.h"
 #include "../AssetStore/AssetStore.h"
 
 #include <SDL2/SDL.h>
@@ -22,6 +23,7 @@ public:
         struct RenderEntity{
             Transformcomponent transformcomponent;
             SpriteComponent spriteComponent;
+            AnimationComponent animationComponent;
         };
 
         std::vector<RenderEntity> Renderentities;
@@ -30,6 +32,7 @@ public:
             RenderEntity rendererEntities;
             rendererEntities.spriteComponent = entity.getComponent<SpriteComponent>();
             rendererEntities.transformcomponent = entity.getComponent<Transformcomponent>();
+            rendererEntities.animationComponent = (entity.hasComponent<AnimationComponent>()) ? entity.getComponent<AnimationComponent>() : AnimationComponent(0,0,true,0);
             Renderentities.emplace_back(rendererEntities);
 
         };
@@ -37,11 +40,11 @@ public:
             return (i.spriteComponent.zIndex < j.spriteComponent.zIndex);
         });
 
-
         for(auto entity: Renderentities){
             auto transport = entity.transformcomponent;
             auto sprite = entity.spriteComponent;
-            
+            auto animation = entity.animationComponent;
+
             SDL_Rect srcRect = sprite.srcRect;
 
             SDL_Rect dstRect = {
@@ -60,7 +63,8 @@ public:
                 &dstRect,
                 transport.rotation,
                 NULL,
-                SDL_FLIP_NONE
+                // SDL_FLIP_NONE
+                animation.flip
             );
 
         }

@@ -3,7 +3,7 @@
 #include <SDL2/SDL.h>
 #include "../ECS/ECS.h"
 #include "../AssetStore/AssetStore.h"
-// #include "../EventBus/EventBus.h"
+#include "../EventBus/EventBus.h"
 
 
 
@@ -20,8 +20,10 @@ class Game{
 
         std::unique_ptr <Registry> registry;
         std::unique_ptr <Assetstore> assetstore;
-        // std::unique_ptr <EventBus> eventBus;
+        std::unique_ptr <EventBus> eventBus;
         SDL_Rect camera;
+
+        std::vector<std::vector<bool>> map;
 
     public:
         Game();

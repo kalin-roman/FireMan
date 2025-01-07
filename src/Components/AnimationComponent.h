@@ -8,17 +8,18 @@ struct AnimationComponent{
     int currentFrame;
     int frameSpeedRate;
     bool  isLoop;
-    int offestFrame;
-    
+    int offsetFrame;
+    SDL_RendererFlip flip;
     int startTime;
 
-    AnimationComponent(int numFrams = 1, int frameSpeedRate = 1, bool isLoop = true, int offsetFrame = 0){
+    AnimationComponent(int numFrams = 1, int frameSpeedRate = 1, bool isLoop = true, int offsetFrame = 0, SDL_RendererFlip flip = SDL_FLIP_NONE){
         this->numFrams = numFrams;
         this->currentFrame = 1;
         this->frameSpeedRate = frameSpeedRate;
         this->isLoop = isLoop;
         this->startTime = SDL_GetTicks();
-        this->offestFrame = offestFrame;
+        this->offsetFrame = offsetFrame;
+        this->flip = flip;
     }
 
 };

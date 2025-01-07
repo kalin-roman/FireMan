@@ -9,6 +9,7 @@ struct SpriteComponent {
     int height;
     int zIndex;
     bool isFixed;
+    bool isFlipped;
     std::string assetId;
     SDL_Rect srcRect;
 
@@ -19,6 +20,7 @@ struct SpriteComponent {
         this->zIndex = zIndex;
         this->isFixed = isFixed;
         this->srcRect = {srcRectX, srcRectY, width, height};
+        this->isFlipped = false;
     }
 };
 

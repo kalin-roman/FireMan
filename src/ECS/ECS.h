@@ -9,8 +9,11 @@
 #include <unordered_map>
 #include <memory>
 #include <iostream>
+#include <SDL2/SDL.h>
+
 
 #include "../Logger/Logger.h"
+
 //#include "../System/Movementsystem.h"
 
 const unsigned int MAX_COMPONENTS = 32;
@@ -286,9 +289,9 @@ void Registry::AddComponent(Entity entity, TArgs&& ...args){
 
     entityComponentSignatures[entityId].set(componentId);
 
-    Logger::Log("Component id = " + std::to_string(componentId) + " was added to entityID = " + std::to_string(entityId));
+    // Logger::Log("Component id = " + std::to_string(componentId) + " was added to entityID = " + std::to_string(entityId));
 
-    std::cout << "COMPONENT ID = "  << componentId << "--> POOL SIZE: " << componentPool->GetSize() << std::endl;
+    // std::cout << "COMPONENT ID = "  << componentId << "--> POOL SIZE: " << componentPool->GetSize() << std::endl;
 
 }
 
