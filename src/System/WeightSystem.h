@@ -43,13 +43,23 @@ public:
             int cX = trans.position.x + (sprite.width * trans.scale.x)/2;
             int cY = trans.position.y + (sprite.height * trans.scale.y)/2;
 
-            int pX = cX / (spriteofMap.width * transformMaps.scale.x);
-            int pY = cY / (spriteofMap.height * transformMaps.scale.y);
+            int pJ = cX / (spriteofMap.width * transformMaps.scale.x);
+            int pI = cY / (spriteofMap.height * transformMaps.scale.y);
 
             rigid.velocity.y = weight.velocity;
-            if(map[pY + 1][pX]){
-                
-                rigid.velocity.y = 0.0;
+            if(map[pI + 1][pJ]){
+                int floorY = (pI + 1) * spriteofMap.height * transformMaps.scale.y;
+                int deltaY = floorY - (trans.position.y + sprite.width * trans.scale.y);
+                trans.position.y += deltaY;
+                rigid.velocity = glm::vec2(0.0,0.0);
+            }
+
+            if(map[pI][pJ - 1]){
+                int wallx = pJ * spriteofMap.width * transformMaps.scale.x;
+                if (wallx >= trans.position.x){
+                    rigid.velocity.x= 0.0;
+                    trans.position.x = wallx;
+                }
             }
                 // for(auto floor : floorEntities){
                 //     auto& f = floor.getComponent<Transformcomponent>();

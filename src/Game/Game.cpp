@@ -37,7 +37,7 @@ int Game::mapHeight;
 
 Game::Game(){
     isRunning = false;
-    // oYel = false;
+    oYel = false;
     registry = std::make_unique<Registry>();
     assetstore = std::make_unique<Assetstore>();
     eventBus = std::make_unique<EventBus>();
@@ -349,7 +349,8 @@ void Game::ProcessInput(){
                 }
                 eventBus->EmitEvent<KeyPressedEvent>(sdlEvent.key.keysym.sym);
 
-                // oYel = sdlEvent.key.keysym.sym == SDLK_d && !oYel;
+                oYel = sdlEvent.key.keysym.sym == SDLK_d && !oYel;
+
                 break;
             case SDL_KEYUP:
                 eventBus->EmitEvent<KeyUpEvent>(sdlEvent.key.keysym.sym);

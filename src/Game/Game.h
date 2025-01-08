@@ -13,7 +13,7 @@ const int MILLISECS_PER_FRAME = 1000/FPS;
 class Game{
     private:
         bool isRunning;
-        // bool oYel;
+        bool oYel;
         int milliSecondsPreviousFrame = 0;
         SDL_Window* window;
         SDL_Renderer* renderer;

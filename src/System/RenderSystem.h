@@ -67,6 +67,11 @@ public:
                 animation.flip
             );
 
+            SDL_SetRenderDrawColor(renderer,255,255,0,255);
+                
+            SDL_RenderDrawRect(renderer, &dstRect);
+                
+
         }
     }
 };
